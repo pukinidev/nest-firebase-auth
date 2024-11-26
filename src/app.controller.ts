@@ -4,7 +4,7 @@ import { Auth } from './decorators/auth.decorator';
 @Controller()
 export class AppController {
   @Get('/morning')
-  @Auth('ADMIN')
+  @Auth('ADMIN', 'USER')
   goodMorning() {
     return 'Good Morning!';
   }
