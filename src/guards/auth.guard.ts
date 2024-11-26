@@ -16,6 +16,9 @@ export class AuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const app = this.admin.setup();
+    if (!context.getArgs()[0]?.headers?.authorization) {
+      throw new UnauthorizedException('Authorization header is not provided');
+    }
     const idToken = context.getArgs()[0]?.headers?.authorization.split(' ')[1];
 
     const permissions = this.reflector.get<string[]>(
